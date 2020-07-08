@@ -29,8 +29,13 @@ conda ?= $(or $(CONDA_EXE),$(shell find /opt/*conda*/bin $(HOME)/*conda*/bin -ty
 artifact_dir ?= $(PWD)/artifacts
 conda_env_filename ?= spec-file
 
+#ifeq ($(wildcard .tempdir),)
+#workdir := $(shell mktemp -t build_$(pkg_name) -d > .tempdir)
+#endif
+
 ifeq ($(wildcard .tempdir),)
-workdir := $(shell mktemp -t build_$(pkg_name) -d > .tempdir)
+workdir = $(shell mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir')
+echo $(workdir) > .tempdir
 endif
 
 workdir := $(shell cat .tempdir)
