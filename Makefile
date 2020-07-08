@@ -30,11 +30,7 @@ artifact_dir ?= $(PWD)/artifacts
 conda_env_filename ?= spec-file
 
 ifeq ($(wildcard $(PWD)/.tempdir),)
-ifeq ($(shell uname),Darwin)
 workdir = $(shell mktemp -d -t "build_$(pkg_name).XXXXXXXX")
-else
-workdir = $(shell mktemp -d "build_$(pkg_name).XXXXXXXX")
-endif
 $(shell echo $(workdir) > $(PWD)/.tempdir)
 endif
 
