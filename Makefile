@@ -35,7 +35,7 @@ conda_env_filename ?= spec-file
 
 ifeq ($(wildcard .tempdir),)
 workdir := $(shell mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir')
-$(shell echo $workdir) > .tempdir
+$(info $(workdir)) > .tempdir
 endif
 
 ifeq ($(coverage),1)
