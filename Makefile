@@ -29,18 +29,16 @@ conda ?= $(or $(CONDA_EXE),$(shell find /opt/*conda*/bin $(HOME)/*conda*/bin -ty
 artifact_dir ?= $(PWD)/artifacts
 conda_env_filename ?= spec-file
 
-#ifeq ($(wildcard .tempdir),)
-#workdir := $(shell mktemp -t build_$(pkg_name) -d > .tempdir)
-#endif
-
-ifeq ($(wildcard .tempdir),)
-workdir := $(shell mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir')
-# $(shell $(info $(workdir)) > .tempdir)
-$(info $(workdir)) > .tempdir
+ifeq ($(wildcard $(PWD)/.tempdir),)
+ifeq ($(shell uname),Darwin)
+workdir = $(shell mktemp -d -t "build_$(pkg_name).XXXXXXXX")
+else
+workdir = $(shell mktemp -d "build_$(pkg_name).XXXXXXXX")
+endif
+$(shell echo $(workdir) > $(PWD)/.tempdir)
 endif
 
-workdir := $(shell cat .tempdir)
-$(info $(workdir))
+workdir := $(shell cat $(PWD)/.tempdir)
 
 ifeq ($(coverage),1)
 coverage_opt = -c tests/coverage.json --coverage-from-egg
