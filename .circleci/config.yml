@@ -114,6 +114,7 @@ jobs:
          libnetcdf: 
             type: string
       executor: << parameters.os >>
+      environment:
          PY_VER: << parameters.py_ver >>
          LIBNETCDF: << parameters.libnetcdf >>
       steps:
