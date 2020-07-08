@@ -7,6 +7,8 @@ SHELL = /bin/bash
 os = $(shell uname)
 pkg_name = pcmdi_metrics
 organization = pcmdi
+user = pcmdi
+
 build_script = conda-recipes/build_tools/conda_build.py
 
 test_pkgs = testsrunner scipy cia coverage coveralls
