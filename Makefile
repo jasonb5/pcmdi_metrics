@@ -34,11 +34,9 @@ conda_env_filename ?= spec-file
 #endif
 
 ifeq ($(wildcard .tempdir),)
-workdir = $(shell mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir')
-echo $(workdir) > .tempdir
+workdir := $(shell mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir')
+$(info $$workdir) > .tempdir
 endif
-
-workdir := $(shell cat .tempdir)
 
 ifeq ($(coverage),1)
 coverage_opt = -c tests/coverage.json --coverage-from-egg
