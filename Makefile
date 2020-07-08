@@ -38,6 +38,8 @@ workdir := $(shell mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir')
 $(shell $(info $(workdir)) > .tempdir)
 endif
 
+workdir := $(shell cat .tempdir)
+
 ifeq ($(coverage),1)
 coverage_opt = -c tests/coverage.json --coverage-from-egg
 endif
